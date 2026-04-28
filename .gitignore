@@ -1,0 +1,12 @@
+# Налаштування редакторів коду
+.vscode/
+.idea/
+
+# Системні файли
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Тимчасові файли
+*.log
+node_modules/
