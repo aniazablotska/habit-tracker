@@ -9,6 +9,6 @@ const btn = document.getElementById('addHabitBtn');
 if (btn) {
     btn.addEventListener('click', function() {
         console.log('Кнопку натиснуто! Подія оброблена в main.js');
-        alert('Звичку додано (обробка в JS)');
+        alert('Звичку додано');
     });
 }
