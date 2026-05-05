@@ -17,3 +17,10 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Артефакти збірки 
+dist/
+
+# Змінні оточення (Безпека)
+.env
+.env.local
