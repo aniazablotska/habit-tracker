@@ -1,0 +1,26 @@
+{
+  "name": "habit-tracker",
+  "version": "1.0.0",
+  "description": "Простий веб-застосунок для відстеження щоденних корисних звичок.",
+  "type": "module",
+  "scripts": {
+    "test:unit": "vitest --exclude tests",
+    "test:unit:ui": "vitest --ui",
+    "test:unit:coverage": "vitest run --coverage --exclude tests",
+    "test:e2e": "playwright test tests",
+    "test:e2e:ui": "playwright test tests --ui",
+    "test": "npm run test:unit && npm run test:e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aniazablotska/habit-tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0",
+    "@vitest/coverage-v8": "^4.1.5",
+    "vitest": "^4.1.5"
+  }
+}
