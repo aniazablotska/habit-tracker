@@ -1,6 +1,4 @@
-[![CI/CD Pipeline]
-(https://github.com/aniazablotska/habit-tracker/actions/workflows/main.yml/badge.svg)]
-(https://github.com/aniazablotska/habit-tracker/actions/workflows/main.yml)
+[![CI/CD Pipeline](https://github.com/aniazablotska/habit-tracker/actions/workflows/main.yml/badge.svg)](https://github.com/aniazablotska/habit-tracker/actions/workflows/main.yml)
 
 # Habit Tracker (Трекер звичок)
 Простий веб-застосунок для відстеження щоденних корисних звичок.
