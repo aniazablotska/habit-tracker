@@ -53,9 +53,8 @@ btn.addEventListener("click", () => {
   if (result === "ok") {
     habits.push({ name: input.value, completed: false });
     input.value = "";
-    alert('Звичку додано!'); // Залишили повідомлення для Кроку 4 Лаби 2
-    render();
-  } else {
+    render(); // 
+} else {
     alert(result); 
   }
 });
