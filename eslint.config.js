@@ -1,18 +1,21 @@
 import js from "@eslint/js";
+import globals from "globals"; // Додаємо цей імпорт
 
 export default [
   js.configs.recommended,
   {
-    rules: {
-      "no-unused-vars": "warn", // попереджати про невикористані змінні
-      "no-undef": "warn", // попереджати про невизначені змінні
-    },
     languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      // Цей рядок каже ESLint, що ми працюємо в браузері
       globals: {
-        document: "readonly",
-        console: "readonly",
-        import: "readonly",
+        ...globals.browser,
+        ...globals.node,
       },
+    },
+    rules: {
+      "no-unused-vars": "warn",
+      "no-undef": "error",
     },
   },
 ];
