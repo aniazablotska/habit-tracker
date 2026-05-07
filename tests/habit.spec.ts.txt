@@ -1,0 +1,38 @@
+import { test, expect } from '@playwright/test';
+import path from 'path';
+
+// Отримуємо шлях до нашого файлу index.html
+const filePath = `file://${path.resolve('src/index.html')}`;
+
+test.describe('Habit Tracker - Наскрізні тести (E2E)', () => {
+
+  test('Сценарій 1: Перевірка завантаження інтерфейсу', async ({ page }) => {
+    // Відкриваємо нашу сторінку
+    await page.goto(filePath);
+
+    // 1. Перевіряємо заголовок у вкладці браузера
+    await expect(page).toHaveTitle(/Habit Tracker/);
+    
+    // 2. Перевіряємо головний заголовок на сторінці
+    const heading = page.locator('h1');
+    await expect(heading).toBeVisible();
+    await expect(heading).toContainText('Мій Трекер Звичок');
+  });
+
+  test('Сценарій 2: Взаємодія з кнопкою додавання', async ({ page }) => {
+    await page.goto(filePath);
+
+    // Налаштовуємо перевірку діалогового вікна (alert)
+    page.on('dialog', async dialog => {
+      expect(dialog.message()).toBe('Звичку додано!');
+      await dialog.accept();
+    });
+
+    // Знаходимо поле вводу і пишемо назву звички
+    await page.fill('#habitInput', 'Пробіжка');
+
+    // Натискаємо кнопку
+    await page.click('#addHabitBtn');
+  });
+
+});

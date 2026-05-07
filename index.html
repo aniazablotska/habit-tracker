@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habit Tracker Pro</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <header class="main-header">
+        <div class="header-top">
+          <h1 class="logo">Habit<span>Tracker</span></h1>
+          <div id="env-status" class="status-badge"></div>
+        </div>
+      </header>
+      <!-- Додано закриваючий тег -->
+
+      <!-- Блок статистики -->
+      <section class="stats-container">
+        <div class="stat-card">
+          <span class="stat-value" id="total-habits">0</span>
+          <span class="stat-label">Всього</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="completed-today">0</span>
+          <span class="stat-label">Виконано</span>
+        </div>
+        <div class="stat-card highlight">
+          <span class="stat-value" id="overall-progress">0%</span>
+          <span class="stat-label">Прогрес</span>
+        </div>
+      </section>
+
+      <!-- Форма додавання -->
+      <section class="input-section">
+        <div class="input-group">
+          <input
+            type="text"
+            id="habitInput"
+            placeholder="Яку звичку опануємо?"
+            autocomplete="off"
+          />
+          <button id="addHabitBtn">Додати звичку</button>
+        </div>
+      </section>
+
+      <!-- Список звичок -->
+      <main class="content">
+        <h3>Мої звички</h3>
+        <ul id="habitList" class="habits-grid"></ul>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
