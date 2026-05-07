@@ -74,3 +74,4 @@ list.addEventListener("click", (e) => {
 
 // Перший запуск
 render();
+const brokenVariable = "Я зламаю пайплайн";
