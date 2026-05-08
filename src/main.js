@@ -1,4 +1,9 @@
 import { validateHabit, calculateProgress } from "./logic.js";
+import posthog from "posthog-js";
+
+posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+  api_host: import.meta.env.VITE_POSTHOG_HOST,
+});
 
 // 1. Налаштування статусу (Лаба 3)
 const appStatus = import.meta.env.VITE_APP_STATUS || "Unknown";
@@ -52,8 +57,9 @@ btn.addEventListener("click", () => {
 
   if (result === "ok") {
     habits.push({ name: input.value, completed: false });
+    posthog.capture("habit_added", { habit_name: input.value });
     input.value = "";
-    render(); // 
+    render(); //
 } else {
     alert(result); 
   }
@@ -66,7 +72,12 @@ list.addEventListener("click", (e) => {
 
   if (e.target.classList.contains("btn-done")) {
     habits[index].completed = !habits[index].completed;
+    posthog.capture("habit_toggled", {
+      habit_name: habits[index].name,
+      completed: habits[index].completed,
+    });
   } else if (e.target.classList.contains("btn-del")) {
+    posthog.capture("habit_deleted", { habit_name: habits[index].name });
     habits.splice(index, 1);
   }
   render();
