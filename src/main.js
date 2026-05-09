@@ -99,7 +99,7 @@ list.addEventListener("click", (e) => {
   }
   render();
 });
-// Крок 2 Лаби 6: Симуляція помилки для перевірки Sentry
+// Симуляція помилки для перевірки Sentry
 const breakBtn = document.getElementById('break-btn');
 if (breakBtn) {
     breakBtn.addEventListener('click', () => {
@@ -109,4 +109,12 @@ if (breakBtn) {
         throw new Error("Habit Tracker Critical Error: Test incident for Lab 6");
     });
 }
+
+// В реальному проєкті ці дані приходять після логіну
+Sentry.setUser({
+  id: "STUDENT_ID_2026",       //  умовний номер
+  email: "aniazablotska@gmail.com", //  пошта
+  username: "Ania Zablotska",   //  ім'я
+  segment: "beta_tester"        // Кастомний тег для сортування
+});
 render();
