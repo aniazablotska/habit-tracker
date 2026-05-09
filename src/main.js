@@ -99,5 +99,14 @@ list.addEventListener("click", (e) => {
   }
   render();
 });
-
+// Крок 2 Лаби 6: Симуляція помилки для перевірки Sentry
+const breakBtn = document.getElementById('break-btn');
+if (breakBtn) {
+    breakBtn.addEventListener('click', () => {
+        console.log("Натиснуто кнопку паніки. Надсилаю звіт у Sentry...");
+        
+        // Генеруємо штучну помилку
+        throw new Error("Habit Tracker Critical Error: Test incident for Lab 6");
+    });
+}
 render();
