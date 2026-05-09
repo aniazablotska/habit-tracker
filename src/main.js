@@ -1,6 +1,18 @@
 import { validateHabit, calculateProgress } from "./logic.js";
 import posthog from "posthog-js";
+import * as Sentry from "@sentry/browser";
 
+//  Ініціалізація Sentry
+Sentry.init({
+  dsn: "https://4a3e7acb79ef7e715a420c1892147e84@o4511361095237632.ingest.de.sentry.io/4511361110376528", 
+  integrations: [
+    Sentry.browserTracingIntegration(),
+    Sentry.replayIntegration(),
+  ],
+  tracesSampleRate: 1.0,
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0,
+});
 posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_POSTHOG_HOST,
 });
