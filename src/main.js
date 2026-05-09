@@ -5,19 +5,18 @@ posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
   api_host: import.meta.env.VITE_POSTHOG_HOST,
 });
 
-// 1. Налаштування статусу (Лаба 3)
 const appStatus = import.meta.env.VITE_APP_STATUS || "Unknown";
 const statusEl = document.getElementById("env-status");
 if (statusEl) statusEl.textContent = appStatus;
 
-// 2. Стан програми (LocalStorage)
 let habits = JSON.parse(localStorage.getItem("habits")) || [];
-
 const input = document.getElementById("habitInput");
 const btn = document.getElementById("addHabitBtn");
 const list = document.getElementById("habitList");
 
-// 3. Функція рендеру
+// --- КРОК 5: Змінна для прапорця ---
+let isDeleteEnabled = true; 
+
 function render() {
   list.innerHTML = "";
   let completedCount = 0;
@@ -36,13 +35,15 @@ function render() {
                 <button class="btn-done ${habit.completed ? "active" : ""}" data-index="${index}">
                     ${habit.completed ? "✓" : "Виконати"}
                 </button>
-                <button class="btn-del" data-index="${index}">🗑</button>
+                <!-- Перевіряємо прапорець перед малюванням кнопки -->
+                <button class="btn-del" data-index="${index}" style="display: ${isDeleteEnabled ? 'block' : 'none'}">
+                    🗑
+                </button>
             </div>
         `;
     list.appendChild(li);
   });
 
-  // Оновлення статистики
   document.getElementById("total-habits").textContent = habits.length;
   document.getElementById("completed-today").textContent = completedCount;
   document.getElementById("overall-progress").textContent =
@@ -51,21 +52,25 @@ function render() {
   localStorage.setItem("habits", JSON.stringify(habits));
 }
 
-// 4. Додавання нової звички (Виправлено після Code Review)
+// Слухаємо зміну прапорців від PostHog
+posthog.onFeatureFlags(() => {
+    isDeleteEnabled = posthog.isFeatureEnabled('show-delete-button');
+    console.log("Стан Feature Flag 'show-delete-button':", isDeleteEnabled);
+    render(); // Перемальовуємо інтерфейс з урахуванням прапорця
+});
+
 btn.addEventListener("click", () => {
   const result = validateHabit(input.value);
-
   if (result === "ok") {
     habits.push({ name: input.value, completed: false });
     posthog.capture("habit_added", { habit_name: input.value });
     input.value = "";
-    render(); //
-} else {
+    render();
+  } else {
     alert(result); 
   }
 });
 
-// 5. Обробка кліків у списку
 list.addEventListener("click", (e) => {
   const index = e.target.dataset.index;
   if (index === undefined) return;
