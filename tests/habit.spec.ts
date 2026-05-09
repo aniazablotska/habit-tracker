@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import path from "path";
 
-const filePath = `file://${path.resolve("src/index.html")}`;
+const filePath = 'https://habit-tracker-inky-six.vercel.app/';
 
 test.describe("Habit Tracker - Комплексні E2E Сценарії", () => {
   test("Сценарій 1: Успішне додавання нової звички в історію", async ({
